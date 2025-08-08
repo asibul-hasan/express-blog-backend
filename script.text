@@ -1,0 +1,13 @@
+"scripts": {
+    "ng": "ng",
+    "start": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng serve",
+    "build": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --output-path=dist/build",
+    "build-prod": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build --configuration production --output-path=dist/prod",
+    "ng-high-memory": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration=prod",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "linux-npm-i": "sudo npm i --unsafe-perm=true --allow-root",
+    "go": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng serve",
+    "host": "node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng serve --host 0.0.0.0"
+  },
