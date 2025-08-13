@@ -5,7 +5,7 @@ import swaggerUi from "swagger-ui-express";
 import dotenv from "dotenv";
 
 dotenv.config();
-const __base_url__ = process.env.BASE_URL;
+const __base_url__ = process.env.BASE_URL || "http://localhost:5000";
 
 // Swagger definition
 const options = {
@@ -13,17 +13,142 @@ const options = {
     openapi: "3.0.0",
     info: {
       title: "Blog API",
-      version: "0.0.0",
-      description: "API documentation for the Blog app",
+      version: "1.0.0",
+      description: "API documentation for the Blog application",
+      contact: {
+        name: "API Support",
+        email: "support@example.com",
+      },
     },
     servers: [
       {
-        url: `${__base_url__}`, // Update if you're using a different port or URL
+        url: __base_url__,
+        description: "Development server",
       },
     ],
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
+      },
+      schemas: {
+        Blog: {
+          type: "object",
+          properties: {
+            metaTitle: {
+              type: "string",
+              description: "Meta title for SEO",
+            },
+            metaDescription: {
+              type: "string",
+              description: "Meta description for SEO",
+            },
+            title: {
+              type: "string",
+              description: "Blog title",
+              required: true,
+            },
+            content: {
+              type: "string",
+              description: "Blog content",
+              required: true,
+            },
+            author: {
+              type: "string",
+              description: "Blog author",
+            },
+            isPublished: {
+              type: "boolean",
+              description: "Publication status",
+              default: false,
+            },
+            category: {
+              type: "string",
+              description: "Category id (MongoDB ObjectId), ref: Category",
+              example: "64ef1d2c8f9b1a23c4567890",
+            },
+            tags: {
+              type: "array",
+              items: {
+                type: "string",
+              },
+              description: "Blog tags",
+            },
+            image: {
+              type: "string",
+              description: "Blog image URL",
+            },
+          },
+        },
+        Category: {
+          type: "object",
+          properties: {
+            name: {
+              type: "string",
+              description: "Category name",
+              required: true,
+            },
+          },
+        },
+        Service: {
+          type: "object",
+          properties: {
+            title: {
+              type: "string",
+              description: "Service title",
+              required: true,
+            },
+            description: {
+              type: "string",
+              description: "Service description",
+              required: true,
+            },
+            imageUrl: {
+              type: "string",
+              description: "Service image URL",
+              required: true,
+            },
+          },
+        },
+        User: {
+          type: "object",
+          properties: {
+            name: {
+              type: "string",
+              description: "User's full name",
+              required: true,
+            },
+            email: {
+              type: "string",
+              format: "email",
+              description: "User's email address",
+              required: true,
+            },
+            role: {
+              type: "string",
+              enum: ["user", "admin"],
+              default: "user",
+              description: "User's role",
+            },
+            isActive: {
+              type: "boolean",
+              default: true,
+              description: "User account status",
+            },
+            avatar: {
+              type: "string",
+              description: "User's avatar URL",
+            },
+          },
+        },
+      },
+    },
   },
-  // Paths to files containing OpenAPI definitions (this includes your route docs)
-  apis: ["./blog.routes.js", "../controllers/blog.controller.js"], // You can include other route files as needed
+  // Paths to files containing OpenAPI definitions
+  apis: ["./routes/*.js", "./controllers/*.js"], // Updated paths
 };
 
 // Initialize Swagger JSDoc

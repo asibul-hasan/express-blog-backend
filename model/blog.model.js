@@ -2,37 +2,37 @@ import mongoose from "mongoose";
 
 const blogSchema = new mongoose.Schema(
   {
-    metaTitle: {
+    meta_title: {
       type: String,
       required: true,
     },
-    metaDescription: {
+    meta_description: {
       type: String,
       required: true,
     },
-    title: {
+    blog_title: {
       type: String,
       required: true,
     },
-    content: {
+    blog_content: {
+      type: String,
+      required: true,
+    },
+    blog_slug: {
       type: String,
       required: true,
     },
     author: {
       type: String,
-      required: true,
+      required: false,
     },
-    // category: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "Category",
-    //     required: true,
-    // },
     isPublished: {
       type: Boolean,
       default: false,
     },
     category: {
-      type: [String],
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
       required: false,
     },
     tags: {

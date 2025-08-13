@@ -1,52 +1,52 @@
 import express from "express";
 import {
-  createBlog,
-  getBlogList,
-  getBlog,
-  updateBlog,
-  deleteBlog,
-} from "../controllers/blog.controller.js";
+  createService,
+  getServiceList,
+  getService,
+  updateService,
+  deleteService,
+} from "../controllers/service.controller.js";
 
-const blogRouter = express.Router();
+const serviceRouter = express.Router();
 
 /**
  * @swagger
- * /api/create-blog:
+ * /api/create-service:
  *   post:
- *     summary: Create a new blog post
- *     tags: [Blogs]
+ *     summary: Create a new service
+ *     tags: [Services]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Blog'
+ *             $ref: '#/components/schemas/Service'
  *     responses:
- *       200:
- *         description: Blog created successfully
+ *       201:
+ *         description: Service created successfully
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
  *                 body:
- *                   $ref: '#/components/schemas/Blog'
+ *                   $ref: '#/components/schemas/Service'
  *                 message:
  *                   type: string
  *       500:
  *         description: Internal server error
  */
-blogRouter.post("/create-blog", createBlog);
+serviceRouter.post("/create-service", createService);
 
 /**
  * @swagger
- * /api/get-blog-list:
+ * /api/get-service-list:
  *   get:
- *     summary: Get all blog posts
- *     tags: [Blogs]
+ *     summary: Get all services
+ *     tags: [Services]
  *     responses:
  *       200:
- *         description: Blogs fetched successfully
+ *         description: Services fetched successfully
  *         content:
  *           application/json:
  *             schema:
@@ -55,100 +55,100 @@ blogRouter.post("/create-blog", createBlog);
  *                 body:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/Blog'
+ *                     $ref: '#/components/schemas/Service'
  *                 message:
  *                   type: string
  *       500:
  *         description: Internal server error
  */
-blogRouter.get("/get-blog-list", getBlogList);
+serviceRouter.get("/get-service-list", getServiceList);
 
 /**
  * @swagger
- * /api/get-blog/{id}:
+ * /api/get-service/{id}:
  *   get:
- *     summary: Get a single blog post by ID
- *     tags: [Blogs]
+ *     summary: Get a single service by ID
+ *     tags: [Services]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: Blog ID
+ *         description: Service ID
  *     responses:
  *       200:
- *         description: Blog fetched successfully
+ *         description: Service fetched successfully
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
  *                 body:
- *                   $ref: '#/components/schemas/Blog'
+ *                   $ref: '#/components/schemas/Service'
  *                 message:
  *                   type: string
  *       404:
- *         description: Blog not found
+ *         description: Service not found
  *       500:
  *         description: Internal server error
  */
-blogRouter.get("/get-blog/:id", getBlog);
+serviceRouter.get("/get-service/:id", getService);
 
 /**
  * @swagger
- * /api/edit-blog/{id}:
+ * /api/edit-service/{id}:
  *   put:
- *     summary: Update a blog post
- *     tags: [Blogs]
+ *     summary: Update a service
+ *     tags: [Services]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: Blog ID
+ *         description: Service ID
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Blog'
+ *             $ref: '#/components/schemas/Service'
  *     responses:
  *       200:
- *         description: Blog updated successfully
+ *         description: Service updated successfully
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
  *                 body:
- *                   $ref: '#/components/schemas/Blog'
+ *                   $ref: '#/components/schemas/Service'
  *                 message:
  *                   type: string
  *       404:
- *         description: Blog not found
+ *         description: Service not found
  *       500:
  *         description: Internal server error
  */
-blogRouter.put("/edit-blog/:id", updateBlog);
+serviceRouter.put("/edit-service/:id", updateService);
 
 /**
  * @swagger
- * /api/delete-blog/{id}:
+ * /api/delete-service/{id}:
  *   delete:
- *     summary: Delete a blog post
- *     tags: [Blogs]
+ *     summary: Delete a service
+ *     tags: [Services]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: Blog ID
+ *         description: Service ID
  *     responses:
  *       200:
- *         description: Blog deleted successfully
+ *         description: Service deleted successfully
  *         content:
  *           application/json:
  *             schema:
@@ -157,10 +157,10 @@ blogRouter.put("/edit-blog/:id", updateBlog);
  *                 message:
  *                   type: string
  *       404:
- *         description: Blog not found
+ *         description: Service not found
  *       500:
  *         description: Internal server error
  */
-blogRouter.delete("/delete-blog/:id", deleteBlog);
+serviceRouter.delete("/delete-service/:id", deleteService);
 
-export default blogRouter;
+export default serviceRouter;

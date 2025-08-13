@@ -1,52 +1,52 @@
 import express from "express";
 import {
-  createBlog,
-  getBlogList,
-  getBlog,
-  updateBlog,
-  deleteBlog,
-} from "../controllers/blog.controller.js";
+  createCategory,
+  getCategoryList,
+  getCategory,
+  updateCategory,
+  deleteCategory,
+} from "../controllers/category.controller.js";
 
-const blogRouter = express.Router();
+const categoryRouter = express.Router();
 
 /**
  * @swagger
- * /api/create-blog:
+ * /api/create-category:
  *   post:
- *     summary: Create a new blog post
- *     tags: [Blogs]
+ *     summary: Create a new category
+ *     tags: [Categories]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Blog'
+ *             $ref: '#/components/schemas/Category'
  *     responses:
- *       200:
- *         description: Blog created successfully
+ *       201:
+ *         description: Category created successfully
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
  *                 body:
- *                   $ref: '#/components/schemas/Blog'
+ *                   $ref: '#/components/schemas/Category'
  *                 message:
  *                   type: string
  *       500:
  *         description: Internal server error
  */
-blogRouter.post("/create-blog", createBlog);
+categoryRouter.post("/create-category", createCategory);
 
 /**
  * @swagger
- * /api/get-blog-list:
+ * /api/get-category-list:
  *   get:
- *     summary: Get all blog posts
- *     tags: [Blogs]
+ *     summary: Get all categories
+ *     tags: [Categories]
  *     responses:
  *       200:
- *         description: Blogs fetched successfully
+ *         description: Categories fetched successfully
  *         content:
  *           application/json:
  *             schema:
@@ -55,100 +55,100 @@ blogRouter.post("/create-blog", createBlog);
  *                 body:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/Blog'
+ *                     $ref: '#/components/schemas/Category'
  *                 message:
  *                   type: string
  *       500:
  *         description: Internal server error
  */
-blogRouter.get("/get-blog-list", getBlogList);
+categoryRouter.get("/get-category-list", getCategoryList);
 
 /**
  * @swagger
- * /api/get-blog/{id}:
+ * /api/get-category/{id}:
  *   get:
- *     summary: Get a single blog post by ID
- *     tags: [Blogs]
+ *     summary: Get a single category by ID
+ *     tags: [Categories]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: Blog ID
+ *         description: Category ID
  *     responses:
  *       200:
- *         description: Blog fetched successfully
+ *         description: Category fetched successfully
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
  *                 body:
- *                   $ref: '#/components/schemas/Blog'
+ *                   $ref: '#/components/schemas/Category'
  *                 message:
  *                   type: string
  *       404:
- *         description: Blog not found
+ *         description: Category not found
  *       500:
  *         description: Internal server error
  */
-blogRouter.get("/get-blog/:id", getBlog);
+categoryRouter.get("/get-category/:id", getCategory);
 
 /**
  * @swagger
- * /api/edit-blog/{id}:
+ * /api/edit-category/{id}:
  *   put:
- *     summary: Update a blog post
- *     tags: [Blogs]
+ *     summary: Update a category
+ *     tags: [Categories]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: Blog ID
+ *         description: Category ID
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Blog'
+ *             $ref: '#/components/schemas/Category'
  *     responses:
  *       200:
- *         description: Blog updated successfully
+ *         description: Category updated successfully
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
  *                 body:
- *                   $ref: '#/components/schemas/Blog'
+ *                   $ref: '#/components/schemas/Category'
  *                 message:
  *                   type: string
  *       404:
- *         description: Blog not found
+ *         description: Category not found
  *       500:
  *         description: Internal server error
  */
-blogRouter.put("/edit-blog/:id", updateBlog);
+categoryRouter.put("/edit-category/:id", updateCategory);
 
 /**
  * @swagger
- * /api/delete-blog/{id}:
+ * /api/delete-category/{id}:
  *   delete:
- *     summary: Delete a blog post
- *     tags: [Blogs]
+ *     summary: Delete a category
+ *     tags: [Categories]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: Blog ID
+ *         description: Category ID
  *     responses:
  *       200:
- *         description: Blog deleted successfully
+ *         description: Category deleted successfully
  *         content:
  *           application/json:
  *             schema:
@@ -157,10 +157,10 @@ blogRouter.put("/edit-blog/:id", updateBlog);
  *                 message:
  *                   type: string
  *       404:
- *         description: Blog not found
+ *         description: Category not found
  *       500:
  *         description: Internal server error
  */
-blogRouter.delete("/delete-blog/:id", deleteBlog);
+categoryRouter.delete("/delete-category/:id", deleteCategory);
 
-export default blogRouter;
+export default categoryRouter;
