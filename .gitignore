@@ -1,7 +1,7 @@
 # Blog-related files
 blog
 blog.pub
-
+.env
 # Logs
 logs
 *.log
@@ -141,3 +141,4 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+.vercel
