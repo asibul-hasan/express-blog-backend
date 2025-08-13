@@ -66,7 +66,7 @@ const options = {
               default: false,
             },
             category: {
-              type: "string",
+              type: "array",
               description: "Category id (MongoDB ObjectId), ref: Category",
               example: "64ef1d2c8f9b1a23c4567890",
             },
