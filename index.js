@@ -13,7 +13,8 @@ import blogRouter from "./routes/blog.routes.js";
 import categoryRouter from "./routes/category.routes.js";
 import serviceRouter from "./routes/service.routes.js";
 import authRouter from "./routes/auth.routes.js";
-
+import swaggerUi from "swagger-ui-express";
+import swaggerJsdoc from "swagger-jsdoc";
 // Import Swagger setup
 import { swaggerDocs } from "./routes/swagger.js";
 
@@ -25,6 +26,19 @@ const app = express();
 
 // Initialize Swagger docs
 swaggerDocs(app);
+const swaggerOptions = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "API Docs",
+      version: "1.0.0",
+    },
+  },
+  apis: ["./routes/*.js"], // Path to your route files with Swagger comments
+};
+
+const swaggerSpec = swaggerJsdoc(swaggerOptions);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Set up PORT and MongoDB URI from environment variables
 const PORT = process.env.PORT || 3000;
