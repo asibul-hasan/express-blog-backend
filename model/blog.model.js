@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const blogSchema = new mongoose.Schema(
   {
-    meta_title: {
+    title: {
       type: String,
       required: true,
     },
@@ -10,25 +10,25 @@ const blogSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    blog_title: {
+    description: {
       type: String,
       required: true,
+    },
+    slug: {
+      type: String,
+      required: true,
+    },
+    isPublished: {
+      type: Boolean,
+      default: false,
     },
     blog_content: {
-      type: String,
-      required: true,
-    },
-    blog_slug: {
       type: String,
       required: true,
     },
     author: {
       type: String,
       required: false,
-    },
-    isPublished: {
-      type: Boolean,
-      default: false,
     },
     category: {
       type: mongoose.Schema.Types.ObjectId,
