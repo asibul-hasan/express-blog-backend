@@ -59,10 +59,21 @@ export const getBlogList = async (req, res) => {
 export const getBlog = async (req, res) => {
   try {
     const { id } = req.params;
-    const singleBlog = await Blog.findById(id);
+    let singleBlog;
+
+    if (id) {
+      singleBlog = await Blog.findOne({ slug: id });
+    } else {
+      singleBlog = await Blog.findById(id);
+    }
+
+    if (!singleBlog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+
     res
       .status(200)
-      .json({ body: singleBlog, message: "Blog fetched successfully" });
+      .json({ body: [singleBlog], message: "Blog fetched successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
