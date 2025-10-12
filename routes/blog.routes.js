@@ -6,6 +6,7 @@ import {
   updateBlog,
   deleteBlog,
 } from "../controllers/blog.controller.js";
+import { protect } from "../middleware/auth.middleware.js";
 
 const blogRouter = express.Router();
 
@@ -22,7 +23,7 @@ const blogRouter = express.Router();
  *           schema:
  *             $ref: '#/components/schemas/Blog'
  *     responses:
- *       200:
+ *       201:
  *         description: Blog created successfully
  *         content:
  *           application/json:
@@ -36,7 +37,7 @@ const blogRouter = express.Router();
  *       500:
  *         description: Internal server error
  */
-blogRouter.post("/create-blog", createBlog);
+blogRouter.post("/create-blog", protect, createBlog);
 
 /**
  * @swagger
@@ -45,7 +46,7 @@ blogRouter.post("/create-blog", createBlog);
  *     summary: Get all blog posts
  *     tags: [Blogs]
  *     responses:
- *       200:
+ *       201:
  *         description: Blogs fetched successfully
  *         content:
  *           application/json:
@@ -77,7 +78,7 @@ blogRouter.get("/get-blog-list", getBlogList);
  *           type: string
  *         description: Blog ID
  *     responses:
- *       200:
+ *       201:
  *         description: Blog fetched successfully
  *         content:
  *           application/json:
@@ -115,7 +116,7 @@ blogRouter.get("/get-blog/:id", getBlog);
  *           schema:
  *             $ref: '#/components/schemas/Blog'
  *     responses:
- *       200:
+ *       201:
  *         description: Blog updated successfully
  *         content:
  *           application/json:
@@ -131,7 +132,7 @@ blogRouter.get("/get-blog/:id", getBlog);
  *       500:
  *         description: Internal server error
  */
-blogRouter.put("/edit-blog/:id", updateBlog);
+blogRouter.put("/edit-blog/:id", protect, updateBlog);
 
 /**
  * @swagger
@@ -147,7 +148,7 @@ blogRouter.put("/edit-blog/:id", updateBlog);
  *           type: string
  *         description: Blog ID
  *     responses:
- *       200:
+ *       201:
  *         description: Blog deleted successfully
  *         content:
  *           application/json:
@@ -161,6 +162,6 @@ blogRouter.put("/edit-blog/:id", updateBlog);
  *       500:
  *         description: Internal server error
  */
-blogRouter.delete("/delete-blog/:id", deleteBlog);
+blogRouter.delete("/delete-blog/:id", protect, deleteBlog);
 
 export default blogRouter;

@@ -94,7 +94,7 @@ authRouter.post("/register", register);
  *                 type: string
  *                 description: User's password
  *     responses:
- *       200:
+ *       201:
  *         description: Login successful
  *         content:
  *           application/json:
@@ -126,7 +126,7 @@ authRouter.post("/login", login);
  *     security:
  *       - bearerAuth: []
  *     responses:
- *       200:
+ *       201:
  *         description: Profile fetched successfully
  *         content:
  *           application/json:
@@ -170,7 +170,7 @@ authRouter.get("/profile", protect, getProfile);
  *                 type: string
  *                 description: User's avatar URL
  *     responses:
- *       200:
+ *       201:
  *         description: Profile updated successfully
  *         content:
  *           application/json:
@@ -216,7 +216,7 @@ authRouter.put("/profile", protect, updateProfile);
  *                 minLength: 6
  *                 description: New password
  *     responses:
- *       200:
+ *       201:
  *         description: Password changed successfully
  *         content:
  *           application/json:
@@ -243,7 +243,7 @@ authRouter.post("/change-password", protect, changePassword);
  *     security:
  *       - bearerAuth: []
  *     responses:
- *       200:
+ *       201:
  *         description: Logged out successfully
  *         content:
  *           application/json:
@@ -266,7 +266,7 @@ authRouter.post("/logout", protect, logout);
  *     security:
  *       - bearerAuth: []
  *     responses:
- *       200:
+ *       201:
  *         description: Users fetched successfully
  *         content:
  *           application/json:
@@ -304,7 +304,7 @@ authRouter.get("/users", protect, admin, getAllUsers);
  *           type: string
  *         description: User ID
  *     responses:
- *       200:
+ *       201:
  *         description: User deleted successfully
  *         content:
  *           application/json:

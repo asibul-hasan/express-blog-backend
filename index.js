@@ -56,7 +56,7 @@ app.use(express.urlencoded({ extended: false }));
  *     summary: Health check endpoint
  *     tags: [Health]
  *     responses:
- *       200:
+ *       201:
  *         description: Server is running
  *         content:
  *           text/plain:

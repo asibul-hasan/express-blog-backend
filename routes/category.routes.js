@@ -6,6 +6,7 @@ import {
   updateCategory,
   deleteCategory,
 } from "../controllers/category.controller.js";
+import { protect, admin } from "../middleware/auth.middleware.js";
 
 const categoryRouter = express.Router();
 
@@ -36,7 +37,7 @@ const categoryRouter = express.Router();
  *       500:
  *         description: Internal server error
  */
-categoryRouter.post("/create-category", createCategory);
+categoryRouter.post("/create-category", protect, admin, createCategory);
 
 /**
  * @swagger
@@ -45,7 +46,7 @@ categoryRouter.post("/create-category", createCategory);
  *     summary: Get all categories
  *     tags: [Categories]
  *     responses:
- *       200:
+ *       201:
  *         description: Categories fetched successfully
  *         content:
  *           application/json:
@@ -77,7 +78,7 @@ categoryRouter.get("/get-category-list", getCategoryList);
  *           type: string
  *         description: Category ID
  *     responses:
- *       200:
+ *       201:
  *         description: Category fetched successfully
  *         content:
  *           application/json:
@@ -115,7 +116,7 @@ categoryRouter.get("/get-category/:id", getCategory);
  *           schema:
  *             $ref: '#/components/schemas/Category'
  *     responses:
- *       200:
+ *       201:
  *         description: Category updated successfully
  *         content:
  *           application/json:
@@ -131,7 +132,7 @@ categoryRouter.get("/get-category/:id", getCategory);
  *       500:
  *         description: Internal server error
  */
-categoryRouter.put("/edit-category/:id", updateCategory);
+categoryRouter.put("/edit-category/:id", protect, admin, updateCategory);
 
 /**
  * @swagger
@@ -147,7 +148,7 @@ categoryRouter.put("/edit-category/:id", updateCategory);
  *           type: string
  *         description: Category ID
  *     responses:
- *       200:
+ *       201:
  *         description: Category deleted successfully
  *         content:
  *           application/json:
@@ -161,6 +162,6 @@ categoryRouter.put("/edit-category/:id", updateCategory);
  *       500:
  *         description: Internal server error
  */
-categoryRouter.delete("/delete-category/:id", deleteCategory);
+categoryRouter.delete("/delete-category/:id", protect, admin, deleteCategory);
 
 export default categoryRouter;
