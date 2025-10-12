@@ -67,13 +67,38 @@ app.use(express.urlencoded({ extended: false }));
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
+// --- CORS Setup: allow only infoaidtech.net, subdomains, and localhost ---
+const allowedOrigins = [
+  /^https?:\/\/([a-z0-9-]+\.)*infoaidtech\.net(:\d+)?$/i, // infoaidtech.net + subdomains
+  /^https?:\/\/localhost(:\d+)?$/i, // localhost + any port
+];
 
 app.use(
   cors({
+    origin: function (origin, callback) {
+      // Allow requests with no origin (e.g. mobile apps, curl)
+      if (!origin) return callback(null, true);
+
+      const isAllowed = allowedOrigins.some((pattern) => pattern.test(origin));
+      if (isAllowed) {
+        callback(null, true);
+      } else {
+        console.warn("❌ Blocked request from origin:", origin);
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true, // If you use cookies or authentication tokens
   })
 );
+
+// app.use(
+//   cors({
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     allowedHeaders: ["Content-Type", "Authorization"],
+//   })
+// );
 
 // Auth routing
 app.use("/api/auth", authRouter);
