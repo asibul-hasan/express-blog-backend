@@ -15,7 +15,7 @@ export const getServiceList = async (req, res) => {
   try {
     const serviceList = await Service.find({});
     res
-      .status(200)
+      .status(201)
       .json({ body: serviceList, message: "Services fetched successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -32,7 +32,7 @@ export const getService = async (req, res) => {
     }
 
     res
-      .status(200)
+      .status(201)
       .json({ body: singleService, message: "Service fetched successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -50,7 +50,7 @@ export const updateService = async (req, res) => {
       return res.status(404).json({ message: "Service not found" });
     }
 
-    res.status(200).json({
+    res.status(201).json({
       body: updatedService,
       message: "Service updated successfully",
     });
@@ -68,7 +68,7 @@ export const deleteService = async (req, res) => {
       return res.status(404).json({ message: "Service not found" });
     }
 
-    res.status(200).json({ message: "Service deleted successfully" });
+    res.status(201).json({ message: "Service deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

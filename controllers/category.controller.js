@@ -1,4 +1,4 @@
-import Category from "../model/category.model.js";
+import Category from "./../model/category.model.js";
 
 export const createCategory = async (req, res) => {
   try {
@@ -15,7 +15,7 @@ export const getCategoryList = async (req, res) => {
   try {
     const categoryList = await Category.find({});
     res
-      .status(200)
+      .status(201)
       .json({ body: categoryList, message: "Categories fetched successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -32,7 +32,7 @@ export const getCategory = async (req, res) => {
     }
 
     res
-      .status(200)
+      .status(201)
       .json({ body: singleCategory, message: "Category fetched successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -50,7 +50,7 @@ export const updateCategory = async (req, res) => {
       return res.status(404).json({ message: "Category not found" });
     }
 
-    res.status(200).json({
+    res.status(201).json({
       body: updatedCategory,
       message: "Category updated successfully",
     });
@@ -68,7 +68,7 @@ export const deleteCategory = async (req, res) => {
       return res.status(404).json({ message: "Category not found" });
     }
 
-    res.status(200).json({ message: "Category deleted successfully" });
+    res.status(201).json({ message: "Category deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

@@ -6,6 +6,7 @@ import {
   updateService,
   deleteService,
 } from "../controllers/service.controller.js";
+import { protect, admin } from "../middleware/auth.middleware.js";
 
 const serviceRouter = express.Router();
 
@@ -36,7 +37,7 @@ const serviceRouter = express.Router();
  *       500:
  *         description: Internal server error
  */
-serviceRouter.post("/create-service", createService);
+serviceRouter.post("/create-service", protect, admin, createService);
 
 /**
  * @swagger
@@ -45,7 +46,7 @@ serviceRouter.post("/create-service", createService);
  *     summary: Get all services
  *     tags: [Services]
  *     responses:
- *       200:
+ *       201:
  *         description: Services fetched successfully
  *         content:
  *           application/json:
@@ -77,7 +78,7 @@ serviceRouter.get("/get-service-list", getServiceList);
  *           type: string
  *         description: Service ID
  *     responses:
- *       200:
+ *       201:
  *         description: Service fetched successfully
  *         content:
  *           application/json:
@@ -115,7 +116,7 @@ serviceRouter.get("/get-service/:id", getService);
  *           schema:
  *             $ref: '#/components/schemas/Service'
  *     responses:
- *       200:
+ *       201:
  *         description: Service updated successfully
  *         content:
  *           application/json:
@@ -131,7 +132,7 @@ serviceRouter.get("/get-service/:id", getService);
  *       500:
  *         description: Internal server error
  */
-serviceRouter.put("/edit-service/:id", updateService);
+serviceRouter.put("/edit-service/:id", protect, admin, updateService);
 
 /**
  * @swagger
@@ -147,7 +148,7 @@ serviceRouter.put("/edit-service/:id", updateService);
  *           type: string
  *         description: Service ID
  *     responses:
- *       200:
+ *       201:
  *         description: Service deleted successfully
  *         content:
  *           application/json:
@@ -161,6 +162,6 @@ serviceRouter.put("/edit-service/:id", updateService);
  *       500:
  *         description: Internal server error
  */
-serviceRouter.delete("/delete-service/:id", deleteService);
+serviceRouter.delete("/delete-service/:id", protect, admin, deleteService);
 
 export default serviceRouter;

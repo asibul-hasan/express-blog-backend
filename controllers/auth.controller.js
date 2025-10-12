@@ -16,7 +16,9 @@ export const register = async (req, res) => {
     // Check if user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ message: "User already exists with this email" });
+      return res
+        .status(400)
+        .json({ message: "User already exists with this email" });
     }
 
     // Create new user
@@ -67,7 +69,7 @@ export const login = async (req, res) => {
     // Generate token
     const token = generateToken(user._id);
 
-    res.status(200).json({
+    res.status(201).json({
       body: {
         user: user.toJSON(),
         token,
@@ -87,7 +89,7 @@ export const getProfile = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    res.status(200).json({
+    res.status(201).json({
       body: user.toJSON(),
       message: "Profile fetched successfully",
     });
@@ -120,7 +122,7 @@ export const updateProfile = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    res.status(200).json({
+    res.status(201).json({
       body: updatedUser.toJSON(),
       message: "Profile updated successfully",
     });
@@ -150,7 +152,7 @@ export const changePassword = async (req, res) => {
     user.password = newPassword;
     await user.save();
 
-    res.status(200).json({
+    res.status(201).json({
       message: "Password changed successfully",
     });
   } catch (error) {
@@ -161,7 +163,7 @@ export const changePassword = async (req, res) => {
 // Logout (client-side token removal)
 export const logout = async (req, res) => {
   try {
-    res.status(200).json({
+    res.status(201).json({
       message: "Logged out successfully",
     });
   } catch (error) {
@@ -173,7 +175,7 @@ export const logout = async (req, res) => {
 export const getAllUsers = async (req, res) => {
   try {
     const users = await User.find({}).select("-password");
-    res.status(200).json({
+    res.status(201).json({
       body: users,
       message: "Users fetched successfully",
     });
@@ -192,7 +194,7 @@ export const deleteUser = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    res.status(200).json({
+    res.status(201).json({
       message: "User deleted successfully",
     });
   } catch (error) {
