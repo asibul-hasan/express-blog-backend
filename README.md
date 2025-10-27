@@ -21,18 +21,21 @@ This is the backend API for a blog application, providing functionalities for ma
 │   ├── auth.controller.js
 │   ├── blog.controller.js
 │   ├── category.controller.js
+│   ├── job.controller.js
 │   └── service.controller.js
 ├── middleware
 │   └── auth.middleware.js
 ├── models
 │   ├── blog.model.js
 │   ├── category.model.js
+│   ├── job.model.js
 │   ├── service.model.js
 │   └── user.model.js
 ├── routes
 │   ├── auth.routes.js
 │   ├── blog.routes.js
 │   ├── category.routes.js
+│   ├── job.routes.js
 │   ├── service.routes.js
 │   └── swagger.js
 ├── .env
@@ -80,6 +83,14 @@ This is the backend API for a blog application, providing functionalities for ma
 - `GET /api/service/get-service/:id`: Get a single service by ID.
 - `PUT /api/service/edit-service/:id`: Update a service by ID.
 - `DELETE /api/service/delete-service/:id`: Delete a service by ID.
+
+### Jobs
+
+- `POST /api/career/create-job`: Create a new job.
+- `GET /api/career/get-job-list`: Get a list of all jobs.
+- `GET /api/career/get-job/:id`: Get a single job by ID.
+- `PUT /api/career/edit-job/:id`: Update a job by ID.
+- `DELETE /api/career/delete-job/:id`: Delete a job by ID.
 
 ## Technologies Used
 

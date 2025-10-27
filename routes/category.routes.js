@@ -12,7 +12,7 @@ const categoryRouter = express.Router();
 
 /**
  * @swagger
- * /api/create-category:
+ * /api/category/create-category:
  *   post:
  *     summary: Create a new category
  *     tags: [Categories]
@@ -41,7 +41,7 @@ categoryRouter.post("/create-category", protect, admin, createCategory);
 
 /**
  * @swagger
- * /api/get-category-list:
+ * /api/category/get-category-list:
  *   get:
  *     summary: Get all categories
  *     tags: [Categories]
@@ -66,7 +66,7 @@ categoryRouter.get("/get-category-list", getCategoryList);
 
 /**
  * @swagger
- * /api/get-category/{id}:
+ * /api/category/get-category/{id}:
  *   get:
  *     summary: Get a single category by ID
  *     tags: [Categories]
@@ -98,7 +98,7 @@ categoryRouter.get("/get-category/:id", getCategory);
 
 /**
  * @swagger
- * /api/edit-category/{id}:
+ * /api/category/edit-category/{id}:
  *   put:
  *     summary: Update a category
  *     tags: [Categories]
@@ -136,7 +136,7 @@ categoryRouter.put("/edit-category/:id", protect, admin, updateCategory);
 
 /**
  * @swagger
- * /api/delete-category/{id}:
+ * /api/category/delete-category/{id}:
  *   delete:
  *     summary: Delete a category
  *     tags: [Categories]

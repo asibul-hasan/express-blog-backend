@@ -6,12 +6,10 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 
-// Import Mongoose models
-import Blog from "./model/blog.model.js";
-import Category from "./model/category.model.js";
 import blogRouter from "./routes/blog.routes.js";
 import categoryRouter from "./routes/category.routes.js";
 import serviceRouter from "./routes/service.routes.js";
+import careerRouter from "./routes/job.routes.js";
 import authRouter from "./routes/auth.routes.js";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
@@ -111,6 +109,8 @@ app.use("/api/category", categoryRouter);
 
 // Service routing
 app.use("/api/service", serviceRouter);
+
+app.use("/api/career", careerRouter);
 
 // Connect to MongoDB and start the server
 mongoose

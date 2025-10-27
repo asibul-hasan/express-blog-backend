@@ -1,53 +1,53 @@
 import express from "express";
 import {
-  createService,
-  getServiceList,
-  getService,
-  updateService,
-  deleteService,
-} from "../controllers/service.controller.js";
+  createJob,
+  getJobList,
+  getJob,
+  updateJob,
+  deleteJob,
+} from "../controllers/job.controller.js";
 import { protect, admin } from "../middleware/auth.middleware.js";
 
-const serviceRouter = express.Router();
+const careerRouter = express.Router();
 
 /**
  * @swagger
- * /api/service/service/create-service:
+ * /api/career/create-job:
  *   post:
- *     summary: Create a new service
- *     tags: [Services]
+ *     summary: Create a new job
+ *     tags: [Careers]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Service'
+ *             $ref: '#/components/schemas/job'
  *     responses:
  *       201:
- *         description: Service created successfully
+ *         description: job created successfully
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
  *                 body:
- *                   $ref: '#/components/schemas/Service'
+ *                   $ref: '#/components/schemas/job'
  *                 message:
  *                   type: string
  *       500:
  *         description: Internal server error
  */
-serviceRouter.post("/create-service", protect, admin, createService);
+careerRouter.post("/create-job", protect, admin, createJob);
 
-/**
+/**s
  * @swagger
- * /api/service/get-service-list:
+ * /api/career/get-job-list:
  *   get:
- *     summary: Get all services
- *     tags: [Services]
+ *     summary: Get all jobs
+ *     tags: [Careers]
  *     responses:
  *       201:
- *         description: Services fetched successfully
+ *         description: jobs fetched successfully
  *         content:
  *           application/json:
  *             schema:
@@ -56,100 +56,100 @@ serviceRouter.post("/create-service", protect, admin, createService);
  *                 body:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/Service'
+ *                     $ref: '#/components/schemas/job'
  *                 message:
  *                   type: string
  *       500:
  *         description: Internal server error
  */
-serviceRouter.get("/get-service-list", getServiceList);
+careerRouter.get("/get-job-list", getJobList);
 
 /**
  * @swagger
- * /api/service/get-service/{id}:
+ * /api/career/get-job/{id}:
  *   get:
- *     summary: Get a single service by ID
- *     tags: [Services]
+ *     summary: Get a single job by ID
+ *     tags: [Careers]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: Service ID
+ *         description: job ID
  *     responses:
  *       201:
- *         description: Service fetched successfully
+ *         description: job fetched successfully
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
  *                 body:
- *                   $ref: '#/components/schemas/Service'
+ *                   $ref: '#/components/schemas/job'
  *                 message:
  *                   type: string
  *       404:
- *         description: Service not found
+ *         description: job not found
  *       500:
  *         description: Internal server error
  */
-serviceRouter.get("/get-service/:id", getService);
+careerRouter.get("/get-job/:id", getJob);
 
 /**
  * @swagger
- * /api/service/edit-service/{id}:
+ * /api/career/edit-job/{id}:
  *   put:
- *     summary: Update a service
- *     tags: [Services]
+ *     summary: Update a job
+ *     tags: [Careers]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: Service ID
+ *         description: job ID
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Service'
+ *             $ref: '#/components/schemas/job'
  *     responses:
  *       201:
- *         description: Service updated successfully
+ *         description: job updated successfully
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
  *                 body:
- *                   $ref: '#/components/schemas/Service'
+ *                   $ref: '#/components/schemas/job'
  *                 message:
  *                   type: string
  *       404:
- *         description: Service not found
+ *         description: job not found
  *       500:
  *         description: Internal server error
  */
-serviceRouter.put("/edit-service/:id", protect, admin, updateService);
+careerRouter.put("/edit-job/:id", protect, admin, updateJob);
 
 /**
  * @swagger
- * /api/service/delete-service/{id}:
+ * /api/career/delete-job/{id}:
  *   delete:
- *     summary: Delete a service
- *     tags: [Services]
+ *     summary: Delete a job
+ *     tags: [Careers]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: Service ID
+ *         description: job ID
  *     responses:
  *       201:
- *         description: Service deleted successfully
+ *         description: job deleted successfully
  *         content:
  *           application/json:
  *             schema:
@@ -158,10 +158,10 @@ serviceRouter.put("/edit-service/:id", protect, admin, updateService);
  *                 message:
  *                   type: string
  *       404:
- *         description: Service not found
+ *         description: job not found
  *       500:
  *         description: Internal server error
  */
-serviceRouter.delete("/delete-service/:id", protect, admin, deleteService);
+careerRouter.delete("/delete-job/:id", protect, admin, deleteJob);
 
-export default serviceRouter;
+export default careerRouter;
