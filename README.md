@@ -1,50 +1,45 @@
-# Blog API
-
-This is the backend API for a blog application, providing functionalities for managing blog posts, categories, services, and user authentication.
-
-## Features
-
-- User registration and authentication (JWT-based)
-- User profile management
-- Password change and recovery
-- Admin and user roles
-- CRUD operations for blog posts
-- CRUD operations for categories
-- CRUD operations for services
-- API documentation with Swagger
-
 ## Project Structure
 
 ```
 .
-├── controllers
-│   ├── auth.controller.js
-│   ├── blog.controller.js
-│   ├── category.controller.js
-│   ├── job.controller.js
-│   └── service.controller.js
-├── middleware
-│   └── auth.middleware.js
-├── models
-│   ├── blog.model.js
-│   ├── category.model.js
-│   ├── job.model.js
-│   ├── service.model.js
-│   └── user.model.js
-├── routes
-│   ├── auth.routes.js
-│   ├── blog.routes.js
-│   ├── category.routes.js
-│   ├── job.routes.js
-│   ├── service.routes.js
-│   └── swagger.js
-├── .env
-├── .gitignore
-├── index.js
-├── LICENSE
-├── package-lock.json
-├── package.json
-└── README.md
+├───.gitignore
+├───.vercel.zip
+├───index.js
+├───LICENSE
+├───package-lock.json
+├───package.json
+├───README.md
+├───script.text
+├───vercel.json
+├───.git\
+├───.vercel\
+├───api\
+├───controllers\
+│   ├───auth.controller.js
+│   ├───blog.controller.js
+│   ├───category.controller.js
+│   ├───chatbot.controller.js
+│   ├───job.controller.js
+│   └───service.controller.js
+├───middleware\
+│   └───auth.middleware.js
+├───model\
+│   ├───blog.model.js
+│   ├───category.model.js
+│   ├───job.model.js
+│   ├───service.model.js
+│   └───user.model.js
+├───node_modules\
+├───routes\
+│   ├───auth.routes.js
+│   ├───blog.routes.js
+│   ├───category.routes.js
+│   ├───chatbot.routes.js
+│   ├───job.routes.js
+│   ├───service.routes.js
+│   └───swagger.js
+└───scripts\
+    └───migrate-jobs-slugs.js
 ```
 
 ## API Endpoints
@@ -151,3 +146,44 @@ This is the backend API for a blog application, providing functionalities for ma
 ## API Documentation
 
 The API documentation is generated using Swagger. Once the server is running, you can access the documentation at `http://localhost:3000/api-docs`.
+
+## Deployment
+
+This project is configured for deployment on Vercel.
+
+### Prerequisites
+
+- A Vercel account.
+- Vercel CLI installed on your local machine.
+
+### Steps
+
+1.  **Login to Vercel:**
+
+    Open your terminal and run the following command to log in to your Vercel account:
+
+    ```bash
+    vercel login
+    ```
+
+2.  **Deploy the Application:**
+
+    Once you are logged in, you can deploy the application by running the following command in the root directory of the project:
+
+    ```bash
+    vercel
+    ```
+
+    The Vercel CLI will guide you through the deployment process. It will automatically detect the project type and configure the deployment settings.
+
+3.  **Set Environment Variables:**
+
+    After the deployment is complete, you need to set the environment variables in the Vercel dashboard. Go to your project settings on Vercel and add the following environment variables:
+
+    - `MONGO_URI`: Your MongoDB connection string.
+    - `JWT_SECRET`: Your JWT secret key.
+
+4.  **Access the Deployed Application:**
+
+    Once the environment variables are set, your application will be deployed and accessible at the URL provided by Vercel.
+
