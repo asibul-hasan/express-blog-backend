@@ -68,7 +68,7 @@ careerRouter.get("/get-job-list", getJobList);
  * @swagger
  * /api/career/get-job/{id}:
  *   get:
- *     summary: Get a single job by ID
+ *     summary: Get a single job by ID or slug
  *     tags: [Careers]
  *     parameters:
  *       - in: path
@@ -76,10 +76,10 @@ careerRouter.get("/get-job-list", getJobList);
  *         required: true
  *         schema:
  *           type: string
- *         description: job ID
+ *         description: Job ID or slug
  *     responses:
- *       201:
- *         description: job fetched successfully
+ *       200:
+ *         description: Job fetched successfully
  *         content:
  *           application/json:
  *             schema:
@@ -90,7 +90,7 @@ careerRouter.get("/get-job-list", getJobList);
  *                 message:
  *                   type: string
  *       404:
- *         description: job not found
+ *         description: Job not found
  *       500:
  *         description: Internal server error
  */

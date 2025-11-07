@@ -43,6 +43,10 @@ const jobSchema = new mongoose.Schema(
     des3: {
       type: String,
     },
+    slug: {
+      type: String,
+      unique: true,
+    },
   },
   { timestamps: true }
 );

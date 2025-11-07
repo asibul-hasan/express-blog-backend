@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Job from "../model/job.model.js";
 
 export const createJob = async (req, res) => {
@@ -25,14 +26,21 @@ export const getJobList = async (req, res) => {
 export const getJob = async (req, res) => {
   try {
     const { id } = req.params;
-    const singleJob = await Job.findById(id);
+    let singleJob;
+
+    // Check if the provided id is a valid ObjectId
+    if (mongoose.Types.ObjectId.isValid(id)) {
+      singleJob = await Job.findById(id);
+    } else {
+      singleJob = await Job.findOne({ slug: id });
+    }
 
     if (!singleJob) {
       return res.status(404).json({ message: "Job not found" });
     }
 
     res
-      .status(201)
+      .status(200)
       .json({ body: singleJob, message: "Job fetched successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
