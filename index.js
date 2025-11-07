@@ -11,6 +11,7 @@ import categoryRouter from "./routes/category.routes.js";
 import serviceRouter from "./routes/service.routes.js";
 import careerRouter from "./routes/job.routes.js";
 import authRouter from "./routes/auth.routes.js";
+import chatbotRouter from "./routes/chatbot.routes.js";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
 // Import Swagger setup
@@ -111,6 +112,9 @@ app.use("/api/category", categoryRouter);
 app.use("/api/service", serviceRouter);
 
 app.use("/api/career", careerRouter);
+
+// Chatbot routing
+app.use("/api/chatbot", chatbotRouter);
 
 // Connect to MongoDB and start the server
 mongoose
