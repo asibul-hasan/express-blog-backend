@@ -79,6 +79,24 @@ export const getBlog = async (req, res) => {
   }
 };
 
+export const getBlogBySlug = async (req, res) => {
+  try {
+    const { slug } = req.params;
+    const blog = await Blog.findOne({ slug });
+
+    if (!blog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+
+    res.status(201).json({
+      body: [blog],
+      message: "Blog fetched successfully",
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export const updateBlog = async (req, res) => {
   try {
     const { id } = req.params;

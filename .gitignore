@@ -2,6 +2,7 @@
 blog
 blog.pub
 .env
+.env.backup
 # Logs
 logs
 *.log
