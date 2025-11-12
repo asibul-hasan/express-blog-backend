@@ -144,6 +144,36 @@ const options = {
             },
           },
         },
+        jobApplication: {
+          type: "object",
+          properties: {
+            jobId: {
+              type: "string",
+              description: "ID of the job applied for",
+            },
+            fullName: {
+              type: "string",
+              description: "Applicant's full name",
+            },
+            email: {
+              type: "string",
+              format: "email",
+              description: "Applicant's email address",
+            },
+            phone: {
+              type: "string",
+              description: "Applicant's phone number",
+            },
+            coverLetter: {
+              type: "string",
+              description: "Applicant's cover letter",
+            },
+            cvUrl: {
+              type: "string",
+              description: "URL to applicant's CV",
+            },
+          },
+        },
       },
     },
   },

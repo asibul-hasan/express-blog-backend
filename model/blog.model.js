@@ -31,11 +31,14 @@ const blogSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    category: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Category",
-      required: false,
-    },
+    // 🔽 Allow multiple categories
+    category: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Category",
+        required: false,
+      },
+    ],
     tags: {
       type: [String],
       required: false,

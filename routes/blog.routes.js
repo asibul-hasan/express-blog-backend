@@ -3,6 +3,7 @@ import {
   createBlog,
   getBlogList,
   getBlog,
+  getBlogBySlug,
   updateBlog,
   deleteBlog,
 } from "../controllers/blog.controller.js";
@@ -95,6 +96,38 @@ blogRouter.get("/get-blog-list", getBlogList);
  *         description: Internal server error
  */
 blogRouter.get("/get-blog/:id", getBlog);
+
+/**
+ * @swagger
+ * /api/blog/get-blog-by-slug/{slug}:
+ *   get:
+ *     summary: Get a single blog post by slug
+ *     tags: [Blogs]
+ *     parameters:
+ *       - in: path
+ *         name: slug
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Blog slug
+ *     responses:
+ *       201:
+ *         description: Blog fetched successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 body:
+ *                   $ref: '#/components/schemas/Blog'
+ *                 message:
+ *                   type: string
+ *       404:
+ *         description: Blog not found
+ *       500:
+ *         description: Internal server error
+ */
+blogRouter.get("/get-blog-by-slug/:slug", getBlogBySlug);
 
 /**
  * @swagger

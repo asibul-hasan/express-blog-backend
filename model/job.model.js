@@ -43,6 +43,22 @@ const jobSchema = new mongoose.Schema(
     des3: {
       type: String,
     },
+    slug: {
+      type: String,
+      unique: true,
+    },
+    isPublished: {
+      type: Boolean,
+      default: false,
+    },
+    expired: {
+      type: Date,
+      default: () => {
+        const date = new Date();
+        date.setMonth(date.getMonth() + 1);
+        return date;
+      },
+    },
   },
   { timestamps: true }
 );
