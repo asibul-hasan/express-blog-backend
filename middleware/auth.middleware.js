@@ -58,7 +58,7 @@ export const admin = async (req, res, next) => {
       return res.status(401).json({ message: "Not authorized" });
     }
 
-    if (req.user.role !== "admin") {
+    if (!["admin", "superadmin"].includes(req.user.role)) {
       return res
         .status(403)
         .json({ message: "Not authorized, admin access required" });

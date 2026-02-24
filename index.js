@@ -2,6 +2,9 @@
 
 // Import required modules
 import express from "express";
+import dns from "dns";
+dns.setServers(["8.8.8.8", "1.1.1.1"]);
+
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -11,6 +14,7 @@ import categoryRouter from "./routes/category.routes.js";
 import serviceRouter from "./routes/service.routes.js";
 import careerRouter from "./routes/job.routes.js";
 import authRouter from "./routes/auth.routes.js";
+import internRouter from "./routes/intern.routes.js";
 import chatbotRouter from "./routes/chatbot.routes.js";
 import chatbotGeminiRouter from "./routes/chatbot-gemini.routes.js";
 import swaggerUi from "swagger-ui-express";
@@ -102,6 +106,9 @@ app.use(
 
 // Auth routing
 app.use("/api/auth", authRouter);
+
+// Intern routing
+app.use("/api/intern", internRouter);
 
 // Blog routing
 app.use("/api/blog", blogRouter);
