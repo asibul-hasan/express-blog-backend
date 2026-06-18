@@ -17,6 +17,8 @@ import authRouter from "./routes/auth.routes.js";
 import internRouter from "./routes/intern.routes.js";
 import chatbotRouter from "./routes/chatbot.routes.js";
 import chatbotGeminiRouter from "./routes/chatbot-gemini.routes.js";
+import ghostRewriteRouter from "./routes/ghost-rewrite.routes.js";
+import aiCheckerRouter from "./routes/ai-checker.routes.js";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
 // Import Swagger setup
@@ -50,8 +52,8 @@ const MONGO_URI = process.env.MONGO_URI;
 // const __base_url__ = process.env.BASE_URL || "http://localhost:3000";
 
 // Middleware to parse incoming JSON and URL-encoded data
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
 /**
  * @swagger
@@ -127,6 +129,10 @@ app.use("/api/chatbot/hf", chatbotRouter);
 
 // Chatbot Gemini routing
 app.use("/api/chatbot/gemini", chatbotGeminiRouter);
+
+// Ghost Rewrite routing
+app.use("/api/ghost-rewrite/check", aiCheckerRouter);
+app.use("/api/ghost-rewrite", ghostRewriteRouter);
 
 // Connect to MongoDB and start the server
 mongoose
