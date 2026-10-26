@@ -19,10 +19,17 @@ import chatbotRouter from "./routes/chatbot.routes.js";
 import chatbotGeminiRouter from "./routes/chatbot-gemini.routes.js";
 import ghostRewriteRouter from "./routes/ghost-rewrite.routes.js";
 import aiCheckerRouter from "./routes/ai-checker.routes.js";
+import commitGeneratorRouter from "./routes/commit-generator.routes.js";
+import analyticsRouter from "./routes/analytics.routes.js";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
-// Import Swagger setup
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 import { swaggerDocs } from "./routes/swagger.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Load environment variables from .env file
 dotenv.config();
@@ -133,6 +140,26 @@ app.use("/api/chatbot/gemini", chatbotGeminiRouter);
 // Ghost Rewrite routing
 app.use("/api/ghost-rewrite/check", aiCheckerRouter);
 app.use("/api/ghost-rewrite", ghostRewriteRouter);
+
+// Conventional Commit Generator routing
+app.use("/api/commit-generator", commitGeneratorRouter);
+
+// Google Analytics 4 routing
+app.use("/api/analytics", analyticsRouter);
+
+// Public root SEO endpoints (useful for local dev proxy and direct crawlers)
+app.get("/robots.txt", (req, res) => {
+  res.type("text/plain").send("User-agent: *\nAllow: /\nDisallow: /dashboard/\nDisallow: /api/\nDisallow: /login\nDisallow: /register\n\nSitemap: https://infoaidtech.net/sitemap.xml\n");
+});
+
+app.get("/sitemap.xml", (req, res) => {
+  const sitemapPath = path.resolve(__dirname, "../angular-blog/src/assets/sitemap.xml");
+  if (fs.existsSync(sitemapPath)) {
+    res.type("application/xml").sendFile(sitemapPath);
+  } else {
+    res.type("application/xml").send('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://infoaidtech.net/</loc></url></urlset>');
+  }
+});
 
 // Connect to MongoDB and start the server
 mongoose
