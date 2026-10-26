@@ -3,6 +3,7 @@ blog
 blog.pub
 .env
 .env.backup
+blogs_backup*.json
 service-account*.json
 # Logs
 logs
