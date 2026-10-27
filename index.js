@@ -21,6 +21,7 @@ import ghostRewriteRouter from "./routes/ghost-rewrite.routes.js";
 import aiCheckerRouter from "./routes/ai-checker.routes.js";
 import commitGeneratorRouter from "./routes/commit-generator.routes.js";
 import analyticsRouter from "./routes/analytics.routes.js";
+import contactRouter from "./routes/contact.routes.js";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
 import fs from "fs";
@@ -146,6 +147,9 @@ app.use("/api/commit-generator", commitGeneratorRouter);
 
 // Google Analytics 4 routing
 app.use("/api/analytics", analyticsRouter);
+
+// Contact messages routing
+app.use("/api/contact", contactRouter);
 
 // Public root SEO endpoints (useful for local dev proxy and direct crawlers)
 app.get("/robots.txt", (req, res) => {
